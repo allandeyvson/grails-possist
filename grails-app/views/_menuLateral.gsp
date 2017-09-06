@@ -15,11 +15,6 @@
                         <span>Tarefa</span>
                     </a>
                 </li>
-                <li id="matriculaSideOpt">
-                    <a href="${createLink(controller: 'matricula')}" title="Matrícula">
-                        <span>Matrícula</span>
-                    </a>
-                </li>
                 <li id="usuarioSideOpt">
                     <a href="${createLink(controller: 'usuario')}" title="Usuario">
                         <span>Usuario</span>

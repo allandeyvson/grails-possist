@@ -3,7 +3,12 @@ var tarefa = new Vue({
     data: {
         tarefas: [],
         tarefa: {},
-        loading: false
+
+        logsTarefa: [],
+        logTarefa : {},
+
+        loading: false,
+        somenteLeitura : false
     },
     methods: {
         getTarefas: function(){
@@ -17,6 +22,7 @@ var tarefa = new Vue({
         },
         novaTarefa: function(){
             this.tarefa = {};
+            this.somenteLeitura = false;
             $("#formTarefa").modal('show');
         },
         salvarTarefa: function(){
@@ -38,10 +44,24 @@ var tarefa = new Vue({
         updateTarefa: function(){
             this.$http.put(window.baseUrl+"tarefa/update/"+this.tarefa.id, this.tarefa).then(function(resp){
                 this.getTarefas();
+                this.somenteLeitura = false;
                 $("#formTarefa").modal('hide');
                 this.tarefa = {};
             }, function(resp){
             })
+        },
+        visualizarTarefa: function (tarefa) {
+            this.$http.get(window.baseUrl+"tarefa/show/"+tarefa.id).then(function(resp){
+                this.tarefa = resp.data;
+            },
+            this.$http.get(window.baseUrl+"logTarefa/list/"+tarefa.id).then(function (resp) {
+                this.logsTarefa = resp.data;
+                this.somenteLeitura = true;
+                $("#formVisualizar").modal('show');
+            }), function(resp){     })
+        },
+        cadastrarLogTarefa: function () {
+
         }
     },
     ready: function(){

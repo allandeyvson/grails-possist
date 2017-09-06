@@ -30,9 +30,12 @@ class TarefaController {
                 titulo: tarefa.titulo,
                 texto: tarefa.texto,
                 usuarioAbertura: tarefa.usuarioAbertura.id,
-                usuarioResponsavel: tarefa.usuarioResponsavel?.id,
+                emailUsuarioAbertura: tarefa.usuarioAbertura.email,
+                usuarioResponsavel: tarefa.usuarioResponsavel.id,
+                emailUsuarioResponsavel: tarefa.usuarioResponsavel.email,
                 dataLimite: tarefa.dataLimite.format("dd/MM/yyyy"),
                 tipoTarefa: tarefa.tipoTarefa.id,
+                descricaoTipoTarefa: tarefa.tipoTarefa.descricao,
                 statusTarefa: tarefa.statusTarefa.name(),
                 porcentagem: tarefa.porcentagem
         ] as JSON)
