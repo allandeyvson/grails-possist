@@ -13,6 +13,7 @@ class TarefaController {
         Tarefa tarefa = new Tarefa()
         bindData(tarefa, params, [exclude:['dataLimite']])
         tarefa.dataLimite = params.date('dataLimite', 'dd/MM/yyyy')
+        tarefa.setUsuarioAbertura(session.usuario)
 
         if(!tarefa.save(flush: true)){
             tarefa.errors.each {println it}

@@ -22,6 +22,8 @@ var tarefa = new Vue({
         },
         novaTarefa: function(){
             this.tarefa = {};
+            this.tarefa.dataLimite = moment().add(1, 'days').format("DD/MM/YYYY");
+            this.tarefa.porcentagem = 0;
             this.somenteLeitura = false;
             $("#formTarefa").modal('show');
         },
@@ -59,7 +61,9 @@ var tarefa = new Vue({
                 this.logsTarefa = resp.data;
                 this.somenteLeitura = true;
                 $("#formVisualizar").modal('show');
-            }), function(resp){     })
+            }), function(resp){
+                    console.info(error)
+            })
         },
         novoLogTarefa: function () {
             this.logTarefa = {};
@@ -69,10 +73,11 @@ var tarefa = new Vue({
             $("#formLogTarefa").modal('show');
         },
         salvarLog: function(){
-            this.$http.post(window.baseUrl+"logTarefa/save", this.logTarefa).then(function(resp){
+            this.$http.post(window.baseUrl+"logTarefa/save", this.logTarefa).then(function(resp) {
                 $("#formLogTarefa").modal('hide');
                 this.visualizarTarefa(this.tarefa);
-            }, function(error){
+            },
+            function(error){
                 console.info(error)
             })
         }

@@ -25,6 +25,7 @@
 <div class="form-group">
     <label for="porcentagem" class="col-sm-2 control-label">Porcentagem</label>
     <div class="col-sm-10">
-        <g:field type="number" name="porcentagem" class="form-control" v-model="logTarefa.porcentagem" readonly="{{somenteLeitura}}"/>
+        <g:select name="porcentagem" from="${1..100}" class="form-control" v-model="logTarefa.porcentagem" noSelection="['-- Selecione --' : '0']"
+                  disabled="{{somenteLeitura}}" readonly="{{somenteLeitura}}"/>
     </div>
 </div>
