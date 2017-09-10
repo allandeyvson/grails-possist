@@ -35,8 +35,9 @@ var tarefa = new Vue({
             })
         },
         editTarefa: function(tarefa){
-            this.$http.get(window.baseUrl+"tarefa/show/"+tarefa.id).then(function(resp){
+                this.$http.get(window.baseUrl+"tarefa/show/"+tarefa.id).then(function(resp){
                 this.tarefa = resp.data;
+                this.somenteLeitura = false;
                 $("#formTarefa").modal('show');
             }, function(resp){
             })
@@ -60,8 +61,20 @@ var tarefa = new Vue({
                 $("#formVisualizar").modal('show');
             }), function(resp){     })
         },
-        cadastrarLogTarefa: function () {
-
+        novoLogTarefa: function () {
+            this.logTarefa = {};
+            this.logTarefa.tarefa = this.tarefa;
+            this.somenteLeitura = false;
+            $("#formVisualizar").modal('hide');
+            $("#formLogTarefa").modal('show');
+        },
+        salvarLog: function(){
+            this.$http.post(window.baseUrl+"logTarefa/save", this.logTarefa).then(function(resp){
+                $("#formLogTarefa").modal('hide');
+                this.visualizarTarefa(this.tarefa);
+            }, function(error){
+                console.info(error)
+            })
         }
     },
     ready: function(){

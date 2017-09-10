@@ -44,7 +44,7 @@ class TarefaController {
     def list(){
         def retorno = []
 
-        Tarefa.list().each {
+        Tarefa.listOrderById().each {
             retorno.add([
                 id: it.id,
                 titulo: it.titulo,
@@ -56,7 +56,7 @@ class TarefaController {
                 porcentagem: it.porcentagem
             ])
         }
-
+0
         render retorno as JSON
     }
 
