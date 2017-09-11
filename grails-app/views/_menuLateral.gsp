@@ -15,6 +15,11 @@
                         <span>Tarefa</span>
                     </a>
                 </li>
+                 <li id="buscarTarefasSideOpt">
+                    <a href="${createLink(controller: 'tarefa', action: 'buscaTarefa')}" title="Buscar Tarefa">
+                        <span>Buscar Tarefa</span>
+                    </a>
+                 </li>
                 <li id="usuarioSideOpt">
                     <a href="${createLink(controller: 'usuario')}" title="Usuario">
                         <span>Usuario</span>

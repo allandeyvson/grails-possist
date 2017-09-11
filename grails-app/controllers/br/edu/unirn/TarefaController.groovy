@@ -8,6 +8,10 @@ class TarefaController {
 
     def index(){}
 
+    def buscaTarefa(){
+
+    }
+
     def save(){
         params << request.JSON
         Tarefa tarefa = new Tarefa()
@@ -73,5 +77,47 @@ class TarefaController {
         }
 
         render status: 200
+    }
+
+    def buscaPorUsuarioCadastro(){
+        Tarefa tarefa = Tarefa.findByUsuarioCadastro(params.usuarioCadastro);
+    }
+
+    def buscaGeralTarefa(){
+        def titulo = params.titulo
+        def texto = params.texto
+        def usuarioAbertura = params.usuarioAbertura
+        def usuarioResponsavel = params.usuarioResponsavel
+        def tipo = params.tipoTarefa
+        def status = params.statusTarefa
+        def criteria = Tarefa.createCriteria()
+        criteria.list {
+            if (titulo){
+                ilike("titulo","%$titulo%")
+            }
+            if (texto) {
+                ilike("texto","%$texto%")
+            }
+            if (usuarioAbertura) {
+                usuarioAbertura{
+                    ilike("email","%$usuarioAbertura%")
+                }
+            }
+            if (usuarioResponsavel) {
+                usuarioResponsavel {
+                    ilike("email","%$usuarioResponsavel%")
+                }
+            }
+            if (tipo) {
+                tipoTarefa {
+                    ilike("descricao", "%$tipo%")
+                }
+            }
+            if (status) {
+                tipoTarefa {
+                    ilike("descricao", "%$status%")
+                }
+            }
+        }
     }
 }
