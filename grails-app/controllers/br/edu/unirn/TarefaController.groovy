@@ -17,6 +17,7 @@ class TarefaController {
         Tarefa tarefa = new Tarefa()
         bindData(tarefa, params, [exclude:['dataLimite']])
         tarefa.dataLimite = params.date('dataLimite', 'dd/MM/yyyy')
+        tarefa.setUsuarioAbertura(session.usuario)
 
         if(!tarefa.save(flush: true)){
             tarefa.errors.each {println it}
@@ -48,7 +49,7 @@ class TarefaController {
     def list(){
         def retorno = []
 
-        Tarefa.list().each {
+        Tarefa.listOrderById().each {
             retorno.add([
                 id: it.id,
                 titulo: it.titulo,
@@ -60,7 +61,7 @@ class TarefaController {
                 porcentagem: it.porcentagem
             ])
         }
-
+0
         render retorno as JSON
     }
 

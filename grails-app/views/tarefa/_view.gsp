@@ -16,9 +16,6 @@
                     </tr>
                     </thead>
                     <tbody>
-                    %{--<tr v-if="loading">
-                        <td colspan="7">Carregando....</td>
-                    </tr>--}%
                     <tr v-for="logTarefa in logsTarefa" :key="logTarefa.id">
                         <td>{{logTarefa.usuarioLog}}</td>
                         <td>{{logTarefa.dateCreated}}</td>
@@ -30,7 +27,5 @@
                 </table>
             </div>
         </div>
-
-
     </div>
 </div>
