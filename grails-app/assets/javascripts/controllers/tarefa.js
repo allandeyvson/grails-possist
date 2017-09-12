@@ -23,7 +23,7 @@ var tarefa = new Vue({
         buscaTarefas: function(){
             this.loading = true;
             this.tarefas = []
-            this.$http.get(window.baseUrl+"tarefa/buscaGeralTarefa/", this.tarefa).then(function(resp){
+            this.$http.post(window.baseUrl+"tarefa/buscaGeralTarefa/", this.tarefa).then(function(resp){
                 this.tarefas = resp.data;
                 this.loading = false;
             }, function(err){

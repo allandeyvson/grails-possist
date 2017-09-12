@@ -15,26 +15,25 @@
                 <div class="form-group">
                     <label for="titulo" class="col-sm-2 control-label">Título</label>
                     <div class="col-sm-10">
-                        <!-- <input type="text" name="titulo" class="form-control" id="titulo" placeholder="Titulo"> -->
-                        <g:textField name="titulo" class="form-control" v-model="tarefa.titulo"/>
+                        <input type="text" name="titulo" class="form-control" id="titulo" placeholder="Titulo" v-model="tarefa.titulo">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="texto" class="col-sm-2 control-label">Texto</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="texto" name="texto" placeholder="Texto">
+                        <input type="text" class="form-control" id="texto" name="texto" placeholder="Texto" v-model="tarefa.texto">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="usuarioAbertura" class="col-sm-2 control-label">Usuario Abertura</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="usuarioAbertura" name="usuarioAbertura" placeholder="Usuario Abertura">
+                        <input type="text" class="form-control" id="usuarioAbertura" name="usuarioAbertura" placeholder="Usuario Abertura" v-model="tarefa.usuarioAbertura">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="usuarioResponsavel" class="col-sm-2 control-label">Usuario Responsável</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="usuarioResponsavel" name="usuarioResponsavel" placeholder="Usuario Responsável">
+                        <input type="text" class="form-control" id="usuarioResponsavel" name="usuarioResponsavel" placeholder="Usuario Responsável" v-model="tarefa.usuarioResponsavel">
                     </div>
                 </div>
                 <div class="form-group">
@@ -48,10 +47,14 @@
                     <label for="statusTarefa" class="col-sm-2 control-label">Status Tarefa</label>
                     <div class="col-sm-10">
                         <g:select name="statusTarefa" class="form-control" v-model="tarefa.statusTarefa" noSelection="['':'-- Selecione --']"
-                                  from="${br.edu.unirn.tipos.StatusTarefa.values()}" optionValue="descricao" optionKey="descricao" />
+                                  from="${br.edu.unirn.tipos.StatusTarefa.values()}" optionValue="descricao" keys="${br.edu.unirn.tipos.StatusTarefa?.values()*.name()}" />
                     </div>
                 </div>
-                <button class="btn btn-success pull-right" @click="buscaTarefas">Buscar</button>
+                <div class="form-group">
+                    <div class="col-sm-12" style="text-align:center">
+                        <button class="btn btn-success" @click="buscaTarefas">Buscar</button>
+                    </div>
+                </div>
              </div>
              </div>
 

@@ -1,5 +1,6 @@
 package br.edu.unirn
 
+import br.edu.unirn.tipos.StatusTarefa
 import grails.converters.JSON
 
 class TarefaController {
@@ -93,47 +94,39 @@ class TarefaController {
 
         System.out.println("---------------------- " + params)
 
-        def titulo = "%" + params.titulo + "%"
+        def titulo = params.titulo
         def texto = params.texto
-        def usuarioAbertura = params.usuarioAbertura
-        def usuarioResponsavel = params.usuarioResponsavel
+        def usuarioAbert = params.usuarioAbertura
+        def usuarioResp = params.usuarioResponsavel
         def tipo = params.tipoTarefa
         def status = params.statusTarefa
         def criteria = Tarefa.createCriteria()
 
         temp = criteria.list {
             if (titulo){
-                ilike("titulo", titulo)
-               println("entrou1")
-               println(titulo)
+                ilike("titulo", "%$titulo")
             }
             if (texto) {
                 ilike("texto","%$texto%")
-                println("entrou2")
             }
-            if (usuarioAbertura) {
+            if (usuarioAbert) {
                 usuarioAbertura{
-                    ilike("email","%$usuarioAbertura%")
+                    ilike("email","%$usuarioAbert%")
                 }
-                println("entrou3")
             }
-            if (usuarioResponsavel) {
+            if (usuarioResp) {
                 usuarioResponsavel {
-                    ilike("email","%$usuarioResponsavel%")
+                    ilike("email","%$usuarioResp%")
                 }
-                println("entrou4")
             }
             if (tipo) {
                 tipoTarefa {
                     ilike("descricao", "%$tipo%")
                 }
-                println("entrou5")
             }
             if (status) {
-                tipoTarefa {
-                    ilike("descricao", "%$status%")
-                }
-                println("entrou6")
+                println("quase2")
+                eq("statusTarefa", StatusTarefa.valueOf(status))
             }
         }
 
