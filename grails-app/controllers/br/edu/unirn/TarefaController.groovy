@@ -85,40 +85,73 @@ class TarefaController {
     }
 
     def buscaGeralTarefa(){
-        def titulo = params.titulo
+
+        def retorno = []
+        def temp = []
+
+        params << request.JSON
+
+        System.out.println("---------------------- " + params)
+
+        def titulo = "%" + params.titulo + "%"
         def texto = params.texto
         def usuarioAbertura = params.usuarioAbertura
         def usuarioResponsavel = params.usuarioResponsavel
         def tipo = params.tipoTarefa
         def status = params.statusTarefa
         def criteria = Tarefa.createCriteria()
-        criteria.list {
+
+        temp = criteria.list {
             if (titulo){
-                ilike("titulo","%$titulo%")
+                ilike("titulo", titulo)
+               println("entrou1")
+               println(titulo)
             }
             if (texto) {
                 ilike("texto","%$texto%")
+                println("entrou2")
             }
             if (usuarioAbertura) {
                 usuarioAbertura{
                     ilike("email","%$usuarioAbertura%")
                 }
+                println("entrou3")
             }
             if (usuarioResponsavel) {
                 usuarioResponsavel {
                     ilike("email","%$usuarioResponsavel%")
                 }
+                println("entrou4")
             }
             if (tipo) {
                 tipoTarefa {
                     ilike("descricao", "%$tipo%")
                 }
+                println("entrou5")
             }
             if (status) {
                 tipoTarefa {
                     ilike("descricao", "%$status%")
                 }
+                println("entrou6")
             }
         }
+
+        temp.each {
+            println(it.titulo)
+            retorno.add([
+                id: it.id,
+                titulo: it.titulo,
+                usuarioAbertura: it.usuarioAbertura.email,
+                usuarioResponsavel: it.usuarioResponsavel?.email,
+                dataLimite: it.dataLimite.format("dd/MM/yyyy"),
+                tipoTarefa: it.tipoTarefa.descricao,
+                statusTarefa: it.statusTarefa.name(),
+                porcentagem: it.porcentagem
+            ])
+        }
+
+        render retorno as JSON
+
     }
 }

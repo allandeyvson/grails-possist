@@ -20,6 +20,16 @@ var tarefa = new Vue({
                 this.loading = false;
             })
         },
+        buscaTarefas: function(){
+            this.loading = true;
+            this.tarefas = []
+            this.$http.get(window.baseUrl+"tarefa/buscaGeralTarefa/", this.tarefa).then(function(resp){
+                this.tarefas = resp.data;
+                this.loading = false;
+            }, function(err){
+                this.loading = false;
+            })
+        },
         novaTarefa: function(){
             this.tarefa = {};
             this.tarefa.dataLimite = moment().add(1, 'days').format("DD/MM/YYYY");
