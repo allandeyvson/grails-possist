@@ -15,7 +15,7 @@
     <label class="col-sm-2 control-label">Usuario Abertura</label>
     <div class="col-sm-10">
             <label class="col-sm-2 control-label" v-if="!tarefa.id">${session?.usuario?.email}</label>
-            <label class="col-sm-2 control-label" v-if="tarefa.id">{{tarefa.tar}}</label>
+            <label class="col-sm-2 control-label" v-if="tarefa.id">{{tarefa.emailUsuarioAbertura}}</label>
     </div>
 </div>
 <div class="form-group">
