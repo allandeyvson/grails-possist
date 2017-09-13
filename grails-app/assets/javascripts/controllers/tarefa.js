@@ -3,6 +3,7 @@ var tarefa = new Vue({
     data: {
         tarefas: [],
         tarefa: {},
+        tarefa2: {},
 
         logsTarefa: [],
         logTarefa : {},
@@ -22,10 +23,11 @@ var tarefa = new Vue({
         },
         buscaTarefas: function(){
             this.loading = true;
-            this.tarefas = []
-            this.$http.post(window.baseUrl+"tarefa/buscaGeralTarefa/", this.tarefa).then(function(resp){
+            this.tarefas = [];
+            this.$http.post(window.baseUrl+"tarefa/buscaGeralTarefa/", this.tarefa2).then(function(resp){
                 this.tarefas = resp.data;
                 this.loading = false;
+                this.tarefa2 = {};
             }, function(err){
                 this.loading = false;
             })
